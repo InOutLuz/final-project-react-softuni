@@ -1,0 +1,36 @@
+.group .form-checkbox {
+    display: flex;
+    align-items: center;
+}
+
+.group .form-checkbox input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+.group .form-checkbox-label {
+    color: var(--sub-color);
+    font-size: 16px;
+    font-weight: normal;
+    display: block;
+    margin-right: 20px;
+    cursor: pointer;
+}
+
+.form {
+    width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+
+    border-radius: 50px;
+    padding: 50px 50px 50px 50px;
+}
+
+.h2 {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.span {
+    margin: auto;
+    display: table;
+}

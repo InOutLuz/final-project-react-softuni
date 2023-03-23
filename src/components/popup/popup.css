@@ -1,0 +1,53 @@
+/* Popup overlay */
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9998;
+}
+
+/* Adjust popup position */
+.sign-in-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    width: 500px;
+    z-index: 99999; /* increase z-index to appear on top of background overlay */
+}
+
+/* Adjust position of popup bottom text */
+.popup-bottom-text {
+    margin-top: 20px;
+    float: right;
+    z-index: 100000; /* increase z-index to appear on top of background overlay and popup */
+}
+
+.close-popup-button {
+    float: right;
+    background-color: transparent;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.close-popup-button:hover {
+    color: #666;
+}
+
+.close-popup-button:focus {
+    outline: none;
+}
+
+/* Hide scrollbar for body when popup is open */
+body.popup-open {
+    overflow: hidden;
+}
