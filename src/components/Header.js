@@ -52,12 +52,12 @@ export default function Header({ handlePopupOpen }) {
                                 </a>
                             </li>
                             <li className="nav-item">
-                                <a
+                                <Link
                                     className="nav-link"
-                                    href="post-details.html"
+                                    to="/search-results/"
                                 >
-                                    Post Details
-                                </a>
+                                    Search
+                                </Link>
                             </li>
                             <li className="nav-item">
                                 <a className="nav-link" href="contact.html">

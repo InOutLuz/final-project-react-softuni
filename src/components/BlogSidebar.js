@@ -2,9 +2,18 @@ import React, { useState } from "react";
 import RecentPosts from "./sidebarComponents/RecentPosts";
 import SearchResult from "./SearchResult";
 import useLatestPosts from "./hooks/useLatestPosts";
+import { useNavigate } from "react-router-dom";
 
 export default function BlogSidebar({ posts }) {
     const { latest3Posts } = useLatestPosts(posts);
+    const [searchQuery, setSearchQuery] = useState("");
+    const navigate = useNavigate();
+
+    const handleSearchSubmit = (event) => {
+        event.preventDefault();
+        const encodedQuery = encodeURIComponent(searchQuery);
+        navigate(`/search-results/?q=${encodedQuery}`);
+    };
 
     return (
         <div className="col-lg-4">
@@ -14,9 +23,7 @@ export default function BlogSidebar({ posts }) {
                         <div className="sidebar-item search">
                             <form
                                 id="search_form"
-                                name="gs"
-                                method="GET"
-                                action="/search-results/"
+                                onSubmit={handleSearchSubmit}
                             >
                                 <input
                                     type="text"
@@ -24,6 +31,10 @@ export default function BlogSidebar({ posts }) {
                                     className="searchText"
                                     placeholder="type to search..."
                                     autoComplete="on"
+                                    value={searchQuery}
+                                    onChange={(event) =>
+                                        setSearchQuery(event.target.value)
+                                    }
                                 />
                             </form>
                         </div>

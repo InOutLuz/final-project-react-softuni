@@ -11,7 +11,9 @@ function SearchResult({ posts }) {
     const { latest3Posts } = useLatestPosts(posts);
 
     const location = useLocation();
-    const searchQuery = location.search.substring(3);
+    const searchQuery = decodeURIComponent(
+        location.search.substring(3).replace(/\+/g, " ")
+    );
 
     useEffect(() => {
         // extract only the part after ?q=
