@@ -25,6 +25,7 @@ import { doc, getDoc } from "firebase/firestore";
 import Popup from "./components/popup/Popup";
 import useLatestPosts from "./components/hooks/useLatestPosts";
 import CommentAdd from "./components/commentAdd/CommentAdd";
+import useComments from "./components/hooks/useComments";
 
 function App() {
     const { userDisplayName } = useContext(UserContext);
@@ -32,6 +33,7 @@ function App() {
     const [loginPopupOpen, setLoginPopupOpen] = useState(false);
 
     const { posts, loading, OnAddPost } = useLatestPosts();
+    const { comments, OnAddComment } = useComments();
 
     const handlePopupClose = () => {
         setLoginPopupOpen(false);
@@ -55,7 +57,12 @@ function App() {
                         <Route index element={<Home posts={posts} />} />
                         <Route
                             path="/blog/:postId"
-                            element={<BlogDetails posts={posts} />}
+                            element={
+                                <BlogDetails
+                                    posts={posts}
+                                    comments={comments}
+                                />
+                            }
                         />
                         <Route
                             path="/posts/:datePosted"

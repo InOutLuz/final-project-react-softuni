@@ -11,11 +11,18 @@ import CommentAdd from "./commentAdd/CommentAdd";
 import DownloadBanner from "./DownloadBanner";
 import BlogSidebar from "./BlogSidebar";
 
-const BlogDetails = ({ posts }) => {
+const BlogDetails = ({ posts, comments }) => {
     const { postId } = useParams();
-
+    const [postComments, setPostComments] = useState([]);
     const [post, setPost] = useState(null);
     const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const filteredComments = comments.filter(
+            (comment) => comment.postId === postId
+        );
+        setPostComments(filteredComments);
+    }, [comments, postId]);
 
     useEffect(() => {
         const getPost = async () => {
@@ -102,46 +109,38 @@ const BlogDetails = ({ posts }) => {
                                                                 <li>
                                                                     <i className="fa fa-tags"></i>
                                                                 </li>
-                                                                {Object.entries(
+                                                                {post.tags &&
                                                                     post.tags
-                                                                )
-                                                                    .filter(
-                                                                        ([
-                                                                            key,
-                                                                            value,
-                                                                        ]) =>
-                                                                            value
-                                                                    )
-                                                                    .map(
-                                                                        ([
-                                                                            key,
-                                                                        ]) => (
-                                                                            <li
-                                                                                key={
-                                                                                    key
-                                                                                }
-                                                                            >
-                                                                                <a href="#">
-                                                                                    {
-                                                                                        key
-                                                                                    }
-                                                                                </a>
-                                                                            </li>
+                                                                        .length >
+                                                                        0 &&
+                                                                    post.tags
+                                                                        .split(
+                                                                            ","
                                                                         )
-                                                                    )
-                                                                    .reduce(
-                                                                        (
-                                                                            prev,
-                                                                            curr
-                                                                        ) => [
-                                                                            prev,
-                                                                            <li key="comma">
-                                                                                ,
-                                                                                &nbsp;
-                                                                            </li>,
-                                                                            curr,
-                                                                        ]
-                                                                    )}
+                                                                        .map(
+                                                                            (
+                                                                                tag,
+                                                                                index,
+                                                                                array
+                                                                            ) => (
+                                                                                <li
+                                                                                    key={
+                                                                                        tag
+                                                                                    }
+                                                                                >
+                                                                                    <a
+                                                                                        href={`#${tag.trim()}`}
+                                                                                    >
+                                                                                        {tag.trim()}
+                                                                                    </a>
+                                                                                    {index !==
+                                                                                        array.length -
+                                                                                            1 &&
+                                                                                        ", "}
+                                                                                    &nbsp;
+                                                                                </li>
+                                                                            )
+                                                                        )}
                                                             </ul>
                                                         </div>
                                                         <div className="col-6">
@@ -167,7 +166,11 @@ const BlogDetails = ({ posts }) => {
                                             </div>
                                         </div>
                                     </div>
-                                    <CommentsDisplay />
+
+                                    <CommentsDisplay
+                                        postComments={postComments}
+                                    />
+
                                     <CommentAdd postId={postId} />
                                 </div>
                             </div>
