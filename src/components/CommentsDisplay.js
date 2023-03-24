@@ -9,29 +9,32 @@ export default function CommentsDisplay({ postComments }) {
                 </div>
 
                 <div className="content">
-                    <ul>
-                        {postComments.map((comment) => (
-                            <li key={comment.id}>
-                                <div className="author-thumb">
-                                    <img
-                                        src="../assets/images/comment-author-01.jpg"
-                                        alt=""
-                                    />
-                                </div>
-                                <div className="right-content">
-                                    <h4>
-                                        {comment.ownerDisplayName}
-                                        <span>
-                                            {" "}
-                                            {formatDate(comment.createdAt)}
-                                        </span>
-                                    </h4>
-                                    <p>{comment.content}</p>
-                                </div>
-                            </li>
-                        ))}
+                    {postComments.length === 0 ? (
+                        <p>No comments yet</p>
+                    ) : (
+                        <ul>
+                            {postComments.map((comment) => (
+                                <li key={comment.id}>
+                                    <div className="author-thumb">
+                                        <img
+                                            src="../assets/images/comment-author-01.jpg"
+                                            alt=""
+                                        />
+                                    </div>
+                                    <div className="right-content">
+                                        <h4>
+                                            {comment.ownerDisplayName}
+                                            <span>
+                                                {" "}
+                                                {formatDate(comment.createdAt)}
+                                            </span>
+                                        </h4>
+                                        <p>{comment.content}</p>
+                                    </div>
+                                </li>
+                            ))}
 
-                        {/* <li className="replied">
+                            {/* <li className="replied">
                   <div className="author-thumb">
                     <img src="../assets/images/comment-author-02.jpg" alt="" />
                   </div>
@@ -47,7 +50,8 @@ export default function CommentsDisplay({ postComments }) {
                     </p>
                   </div>
                 </li> */}
-                    </ul>
+                        </ul>
+                    )}
                 </div>
             </div>
         </div>

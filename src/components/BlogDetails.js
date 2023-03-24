@@ -11,7 +11,7 @@ import CommentAdd from "./commentAdd/CommentAdd";
 import DownloadBanner from "./DownloadBanner";
 import BlogSidebar from "./BlogSidebar";
 
-const BlogDetails = ({ posts, comments }) => {
+const BlogDetails = ({ posts, comments, handlePopupOpen, OnAddComment }) => {
     const { postId } = useParams();
     const [postComments, setPostComments] = useState([]);
     const [post, setPost] = useState(null);
@@ -97,7 +97,10 @@ const BlogDetails = ({ posts, comments }) => {
                                                     </li>
                                                     <li>
                                                         <a href="#">
-                                                            10 Comments
+                                                            {
+                                                                postComments.length
+                                                            }
+                                                            &nbsp; Comments
                                                         </a>
                                                     </li>
                                                 </ul>
@@ -171,7 +174,11 @@ const BlogDetails = ({ posts, comments }) => {
                                         postComments={postComments}
                                     />
 
-                                    <CommentAdd postId={postId} />
+                                    <CommentAdd
+                                        postId={postId}
+                                        handlePopupOpen={handlePopupOpen}
+                                        OnAddComment={OnAddComment}
+                                    />
                                 </div>
                             </div>
                         </div>

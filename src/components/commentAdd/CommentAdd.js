@@ -1,11 +1,11 @@
 import { useState, useContext } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { UserContext } from "../contexts/userContext";
 
 import { addComment } from "../../utils/Firebase.utils";
 import FormInput from "../formInput/FormInput";
 
-export default function CommentAdd(postId) {
+export default function CommentAdd({ handlePopupOpen, OnAddComment, postId }) {
     const { currentUser } = useContext(UserContext);
     const owner = currentUser?.uid || null;
     const { userDisplayName } = useContext(UserContext);
@@ -22,6 +22,7 @@ export default function CommentAdd(postId) {
                 owner
             );
             console.log("New comment added: ", newComment);
+            OnAddComment(newComment);
             setContent("");
         } catch (e) {
             console.error("Error adding comment: ", e);
@@ -57,7 +58,12 @@ export default function CommentAdd(postId) {
                             </div>
                         </form>
                     ) : (
-                        <span>You have to be signed in to post a comment!</span>
+                        <span>
+                            You have to be signed in to write a comment! &nbsp;
+                            <Link to="#" onClick={handlePopupOpen}>
+                                Sign in
+                            </Link>
+                        </span>
                     )}
                 </div>
             </div>

@@ -85,12 +85,7 @@ export const signInAuthUserWithEmailAndPassword = async (email, password) => {
 
 export const signOutUser = async () => await signOut(auth);
 
-export const addComment = async (
-    { postId },
-    ownerDisplayName,
-    content,
-    owner
-) => {
+export const addComment = async (postId, ownerDisplayName, content, owner) => {
     try {
         const createdAt = new Date();
         const docRef = await addDoc(collection(db, "comments"), {

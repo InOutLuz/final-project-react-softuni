@@ -61,6 +61,8 @@ function App() {
                                 <BlogDetails
                                     posts={posts}
                                     comments={comments}
+                                    handlePopupOpen={handlePopupOpen}
+                                    OnAddComment={OnAddComment}
                                 />
                             }
                         />

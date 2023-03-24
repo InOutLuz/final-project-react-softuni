@@ -20,12 +20,14 @@ export default function useComments() {
 
     const OnAddComment = (newComment) => {
         setComments((comments) => [...comments, newComment]);
+        console.log(comments);
     };
 
     useEffect(() => {
         const sortedComments = comments.sort(
             (a, b) => b.createdAt - a.createdAt
         );
+        setComments(sortedComments);
     }, [comments]);
 
     return {
