@@ -1,12 +1,13 @@
-import db from "../utils/Firebase.utils";
+import { db } from "./Firebase.utils";
 import { addDoc, collection } from "firebase/firestore";
 
-const addComment = async (postId, author, content) => {
+const AddComment = async ({ postId }, ownerDisplayName, content, owner) => {
     try {
         const createdAt = new Date();
         const docRef = await addDoc(collection(db, "comments"), {
             postId,
-            author,
+            ownerDisplayName,
+            owner,
             content,
             createdAt,
         });
@@ -18,4 +19,4 @@ const addComment = async (postId, author, content) => {
     }
 };
 
-export default addComment;
+export default AddComment;

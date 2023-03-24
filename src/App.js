@@ -24,34 +24,14 @@ import CreateBlogForm from "./components/blogCreateForm/BlogCreateForm";
 import { doc, getDoc } from "firebase/firestore";
 import Popup from "./components/popup/Popup";
 import useLatestPosts from "./components/hooks/useLatestPosts";
+import CommentAdd from "./components/commentAdd/CommentAdd";
 
 function App() {
-    const { currentUser } = useContext(UserContext);
-
-    const [userDisplayName, setUserDisplayName] = useState([]);
+    const { userDisplayName } = useContext(UserContext);
 
     const [loginPopupOpen, setLoginPopupOpen] = useState(false);
 
     const { posts, loading, OnAddPost } = useLatestPosts();
-
-    useEffect(() => {
-        const getUser = async () => {
-            if (currentUser) {
-                const userRef = doc(db, "users", currentUser.uid);
-                const docSnapshot = await getDoc(userRef);
-                if (docSnapshot.exists()) {
-                    const userData = {
-                        id: docSnapshot.id,
-                        ...docSnapshot.data(),
-                    };
-                    setUserDisplayName(userData);
-                } else {
-                    console.log("No such user!");
-                }
-            }
-        };
-        getUser();
-    }, [currentUser]);
 
     const handlePopupClose = () => {
         setLoginPopupOpen(false);

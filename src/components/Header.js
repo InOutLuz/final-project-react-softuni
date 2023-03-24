@@ -5,10 +5,12 @@ import { UserContext } from "./contexts/userContext";
 import { signOutUser } from "../utils/Firebase.utils";
 
 export default function Header({ handlePopupOpen }) {
-    const { currentUser, setCurrentUser } = useContext(UserContext);
+    const { currentUser, setCurrentUser, userDisplayName, setUserDisplayName } =
+        useContext(UserContext);
     const signOutHandler = async () => {
         await signOutUser();
         setCurrentUser(null);
+        setUserDisplayName("");
     };
     return (
         <header className="">

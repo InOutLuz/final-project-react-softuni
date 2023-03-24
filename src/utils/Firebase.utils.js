@@ -8,7 +8,14 @@ import {
     signInWithEmailAndPassword,
     signOut,
 } from "firebase/auth";
-import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
+import {
+    getFirestore,
+    doc,
+    getDoc,
+    setDoc,
+    addDoc,
+    collection,
+} from "firebase/firestore";
 
 const firebaseConfig = {
     apiKey: "AIzaSyDjeZVgd5jJDWhVUTZvDmr97cQk-OpmQnY",
@@ -77,3 +84,26 @@ export const signInAuthUserWithEmailAndPassword = async (email, password) => {
 };
 
 export const signOutUser = async () => await signOut(auth);
+
+export const addComment = async (
+    { postId },
+    ownerDisplayName,
+    content,
+    owner
+) => {
+    try {
+        const createdAt = new Date();
+        const docRef = await addDoc(collection(db, "comments"), {
+            postId,
+            ownerDisplayName,
+            owner,
+            content,
+            createdAt,
+        });
+        console.log("Comment added with ID: ", docRef.id);
+        return docRef;
+    } catch (e) {
+        console.error("Error adding comment: ", e);
+        throw e;
+    }
+};

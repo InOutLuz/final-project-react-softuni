@@ -7,7 +7,7 @@ import Preloader from "./Preloader";
 
 import BlogDetailsBanner from "./BlogDetailsBanner";
 import CommentsDisplay from "./CommentsDisplay";
-import CommentsSubmit from "./CommentsSubmit";
+import CommentAdd from "./commentAdd/CommentAdd";
 import DownloadBanner from "./DownloadBanner";
 import BlogSidebar from "./BlogSidebar";
 
@@ -168,7 +168,7 @@ const BlogDetails = ({ posts }) => {
                                         </div>
                                     </div>
                                     <CommentsDisplay />
-                                    <CommentsSubmit />
+                                    <CommentAdd postId={postId} />
                                 </div>
                             </div>
                         </div>
