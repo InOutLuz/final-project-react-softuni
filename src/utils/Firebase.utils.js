@@ -1,4 +1,5 @@
 import { initializeApp } from "firebase/app";
+
 import {
     getAuth,
     signInWithRedirect,
@@ -96,7 +97,22 @@ export const addComment = async (postId, ownerDisplayName, content, owner) => {
             createdAt,
         });
         console.log("Comment added with ID: ", docRef.id);
-        return docRef;
+
+        const docSnap = await getDoc(doc(db, "comments", docRef.id));
+
+        const createdAtFromFirestore = docSnap.data().createdAt;
+
+        const newComment = {
+            id: docRef.id,
+            postId,
+            ownerDisplayName,
+            content,
+            owner,
+            createdAt: createdAtFromFirestore,
+        };
+        console.log(createdAtFromFirestore);
+
+        return newComment;
     } catch (e) {
         console.error("Error adding comment: ", e);
         throw e;

@@ -19,7 +19,10 @@ export default function useComments() {
     }, []);
 
     const OnAddComment = (newComment) => {
-        setComments((comments) => [...comments, newComment]);
+        setComments((comments) => [
+            ...comments,
+            { ...newComment, id: newComment.id },
+        ]);
         console.log(comments);
     };
 

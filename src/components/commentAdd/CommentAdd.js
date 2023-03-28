@@ -21,7 +21,15 @@ export default function CommentAdd({ handlePopupOpen, OnAddComment, postId }) {
                 content,
                 owner
             );
-            console.log("New comment added: ", newComment);
+            const commentDetails = {
+                id: newComment.id,
+                postId,
+                ownerDisplayName,
+                content,
+                owner,
+                createdAt: newComment.createdAt,
+            };
+            console.log("New comment added: ", commentDetails);
             OnAddComment(newComment);
             setContent("");
         } catch (e) {

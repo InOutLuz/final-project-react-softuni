@@ -25,8 +25,8 @@ export default function CommentsDisplay({ postComments }) {
                                         <h4>
                                             {comment.ownerDisplayName}
                                             <span>
-                                                {" "}
                                                 {formatDate(comment.createdAt)}
+                                                {console.log(comment.createdAt)}
                                             </span>
                                         </h4>
                                         <p>{comment.content}</p>

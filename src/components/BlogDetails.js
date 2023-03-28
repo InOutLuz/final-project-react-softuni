@@ -21,7 +21,10 @@ const BlogDetails = ({ posts, comments, handlePopupOpen, OnAddComment }) => {
         const filteredComments = comments.filter(
             (comment) => comment.postId === postId
         );
-        setPostComments(filteredComments);
+        const sortedComments = filteredComments.sort(
+            (a, b) => b.createdAt.toDate() - a.createdAt.toDate()
+        );
+        setPostComments(sortedComments);
     }, [comments, postId]);
 
     useEffect(() => {

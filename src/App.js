@@ -55,6 +55,7 @@ function App() {
                     )}
                     <Routes>
                         <Route index element={<Home posts={posts} />} />
+
                         <Route
                             path="/blog/:postId"
                             element={
@@ -66,6 +67,7 @@ function App() {
                                 />
                             }
                         />
+
                         <Route
                             path="/posts/:datePosted"
                             element={<BlogByDateDisplay posts={posts} />}

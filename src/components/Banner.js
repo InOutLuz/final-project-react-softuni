@@ -11,15 +11,6 @@ export default function Banner({
     createdAt,
     id,
 }) {
-    const createdAtDate = new Date(createdAt.seconds * 1000); // convert Firebase timestamp to JavaScript Date object
-    const options = {
-        day: "2-digit",
-        month: "short",
-        year: "numeric",
-    };
-    const formattedDate = createdAtDate.toLocaleDateString("en-UK", options); // Example: Mar 03, 2023
-    /*     const createdAtString = createdAtDate.toLocaleDateString(); // convert Date object to string */
-
     return (
         <div className="item">
             <img src={imgUrl} alt="" />
