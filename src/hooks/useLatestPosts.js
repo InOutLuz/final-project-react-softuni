@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { collection, getDocs } from "firebase/firestore";
-import { db } from "../../utils/Firebase.utils";
+import { db } from "../utils/Firebase.utils";
 
 export default function useLatestPosts() {
     const [posts, setPosts] = useState([]);

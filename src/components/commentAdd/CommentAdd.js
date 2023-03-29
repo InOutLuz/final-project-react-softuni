@@ -1,9 +1,11 @@
 import { useState, useContext } from "react";
-import { Link, useParams } from "react-router-dom";
-import { UserContext } from "../contexts/userContext";
+import { Link } from "react-router-dom";
+
+import FormInput from "../formInput/FormInput";
 
 import { addComment } from "../../utils/Firebase.utils";
-import FormInput from "../formInput/FormInput";
+
+import { UserContext } from "../../contexts/userContext";
 
 export default function CommentAdd({ handlePopupOpen, OnAddComment, postId }) {
     const { currentUser } = useContext(UserContext);
@@ -50,13 +52,13 @@ export default function CommentAdd({ handlePopupOpen, OnAddComment, postId }) {
                                 <div className="col-md-6 col-sm-12">
                                     <fieldset>
                                         <FormInput
-                                            type="text"
+                                            type="textarea"
                                             name="content"
                                             value={content}
                                             handleChange={(e) =>
                                                 setContent(e.target.value)
                                             }
-                                            label="Content"
+                                            label="Your comment"
                                         />
                                         <button onClick={handleAddComment}>
                                             Add Comment

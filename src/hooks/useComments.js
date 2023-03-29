@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { collection, getDocs } from "firebase/firestore";
-import { db } from "../../utils/Firebase.utils";
+import { db } from "../utils/Firebase.utils";
 
 export default function useComments() {
     const [comments, setComments] = useState([]);
@@ -23,7 +23,6 @@ export default function useComments() {
             ...comments,
             { ...newComment, id: newComment.id },
         ]);
-        console.log(comments);
     };
 
     useEffect(() => {

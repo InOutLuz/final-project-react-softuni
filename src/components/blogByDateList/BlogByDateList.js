@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import BlogSinglePost from "./BlogSinglePost";
-import formatDate from "../utils/FormatDate";
-import DownloadBanner from "./DownloadBanner";
-import BlogDetailsBanner from "./BlogDetailsBanner";
 
-export default function BlogByDateDisplay({ posts }) {
+import BlogSinglePostItemNoComments from "../blogSinglePostItemNoComments/BlogSinglePostItemNoComments";
+import DownloadBanner from "../downloadBanner/DownloadBanner";
+import InnerPageInformationBanner from "../innerPagesInformationBanner/InnerPageInformationBanner";
+
+import formatDate from "../../utils/FormatDate";
+
+export default function BlogByDateList({ posts, comments }) {
     const [latestPosts, setLatestPosts] = useState([]);
     const { datePosted } = useParams(); // get the date parameter from the URL
 
@@ -22,17 +24,21 @@ export default function BlogByDateDisplay({ posts }) {
     // Update the latestPosts state with the sorted posts
     useEffect(() => {
         setLatestPosts(sortedPosts);
-    }, []);
+    }, [sortedPosts]);
 
     return (
         <>
-            <BlogDetailsBanner
+            <InnerPageInformationBanner
                 blogName={datePosted}
                 subtitle={"All post from:"}
             />
             <DownloadBanner />
             {latestPosts.map((p) => (
-                <BlogSinglePost key={p.id} {...p} />
+                <BlogSinglePostItemNoComments
+                    key={p.id}
+                    {...p}
+                    comments={comments}
+                />
             ))}
         </>
     );

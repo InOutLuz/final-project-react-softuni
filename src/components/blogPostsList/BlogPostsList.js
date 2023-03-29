@@ -1,7 +1,7 @@
-import BlogSinglePost from "./BlogSinglePost";
-import BlogSidebar from "./BlogSidebar";
+import BlogSinglePostItemNoComments from "../blogSinglePostItemNoComments/BlogSinglePostItemNoComments";
+import BlogSidebar from "../blogSidebar/BlogSidebar";
 
-export default function BlogPostsAll({ posts, latest3Posts }) {
+export default function BlogPostsList({ posts, latest3Posts, comments }) {
     return (
         <>
             <section className="blog-posts">
@@ -12,12 +12,20 @@ export default function BlogPostsAll({ posts, latest3Posts }) {
                                 <div className="row">
                                     <div className="col-lg-12">
                                         <div className="blog-post">
-                                            {posts.map((p) => (
-                                                <BlogSinglePost
-                                                    key={p.id}
-                                                    {...p}
-                                                />
-                                            ))}
+                                            {posts.length === 0 ? (
+                                                <h1>
+                                                    Sorry we didn't find any
+                                                    posts matching your search.
+                                                </h1>
+                                            ) : (
+                                                posts.map((p) => (
+                                                    <BlogSinglePostItemNoComments
+                                                        key={p.id}
+                                                        {...p}
+                                                        comments={comments}
+                                                    />
+                                                ))
+                                            )}
                                         </div>
                                     </div>
 

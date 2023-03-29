@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import RecentPosts from "./sidebarComponents/RecentPosts";
-import SearchResult from "./SearchResult";
-import useLatestPosts from "./hooks/useLatestPosts";
 import { useNavigate } from "react-router-dom";
+
+import RecentPosts from "../blogSidebarComponents/RecentPosts";
+
+import useLatestPosts from "../../hooks/useLatestPosts";
 
 export default function BlogSidebar({ posts }) {
     const { latest3Posts } = useLatestPosts(posts);

@@ -1,7 +1,9 @@
-import formatDate from "../utils/FormatDate";
+import "./Banner.css";
+
+import formatDate from "../../utils/FormatDate";
 import { Link } from "react-router-dom";
 
-import "./Banner.css";
+import usePostComments from "../../hooks/usePostComments";
 
 export default function Banner({
     author,
@@ -10,7 +12,10 @@ export default function Banner({
     category,
     createdAt,
     id,
+    comments,
 }) {
+    const postComments = usePostComments(comments, id);
+
     return (
         <div className="item">
             <img src={imgUrl} alt="" />
@@ -37,7 +42,9 @@ export default function Banner({
                             </Link>
                         </li>
                         <li>
-                            <a href="#">12 Comments</a>
+                            <Link to={`/blog/${id}`}>
+                                <span>{postComments.length} Comments</span>
+                            </Link>
                         </li>
                     </ul>
                 </div>

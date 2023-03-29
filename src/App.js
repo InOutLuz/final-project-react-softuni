@@ -1,31 +1,23 @@
 import "./App.css";
 
-import Preloader from "./components/Preloader";
-
-import Home from "./components/Home";
-
-import { useState, useEffect } from "react";
-import { db } from "./utils/Firebase.utils";
-
+import { useState, useContext } from "react";
 import { Route, Routes } from "react-router-dom";
 
-import BlogDetails from "./components/BlogDetails";
-import NotFound from "./components/NotFound";
-
-import Header from "./components/Header";
-import Footer from "./components/Footer";
-
-import BlogByDateDisplay from "./components/BlogByDateDisplay";
-import SearchResult from "./components/SearchResult";
-
-import { useContext } from "react";
-import { UserContext } from "./components/contexts/userContext";
+import Preloader from "./components/preloader/Preloader";
+import BlogPostDetails from "./components/blogPostDetails/BlogPostDetails";
+import BlogByDateList from "./components/blogByDateList/BlogByDateList";
+import BlogPostsHome from "./components/blogPostsHome/BlogPostsHome";
 import CreateBlogForm from "./components/blogCreateForm/BlogCreateForm";
-import { doc, getDoc } from "firebase/firestore";
-import Popup from "./components/popup/Popup";
-import useLatestPosts from "./components/hooks/useLatestPosts";
-import CommentAdd from "./components/commentAdd/CommentAdd";
-import useComments from "./components/hooks/useComments";
+import SearchResult from "./components/searchResult/SearchResult";
+import NotFound from "./components/notFound/NotFound";
+import Header from "./components/header/Header";
+import Footer from "./components/footer/Footer";
+import LoginRegisterPopup from "./components/loginRegisterPopup/LoginRegisterPopup";
+
+import { UserContext } from "./contexts/userContext";
+
+import useLatestPosts from "./hooks/useLatestPosts";
+import useComments from "./hooks/useComments";
 
 function App() {
     const { userDisplayName } = useContext(UserContext);
@@ -51,15 +43,25 @@ function App() {
                 <>
                     <Header handlePopupOpen={handlePopupOpen} />
                     {loginPopupOpen && (
-                        <Popup handlePopupClose={handlePopupClose} />
+                        <LoginRegisterPopup
+                            handlePopupClose={handlePopupClose}
+                        />
                     )}
                     <Routes>
-                        <Route index element={<Home posts={posts} />} />
+                        <Route
+                            index
+                            element={
+                                <BlogPostsHome
+                                    posts={posts}
+                                    comments={comments}
+                                />
+                            }
+                        />
 
                         <Route
                             path="/blog/:postId"
                             element={
-                                <BlogDetails
+                                <BlogPostDetails
                                     posts={posts}
                                     comments={comments}
                                     handlePopupOpen={handlePopupOpen}
@@ -70,11 +72,21 @@ function App() {
 
                         <Route
                             path="/posts/:datePosted"
-                            element={<BlogByDateDisplay posts={posts} />}
+                            element={
+                                <BlogByDateList
+                                    posts={posts}
+                                    comments={comments}
+                                />
+                            }
                         />
                         <Route
                             path="/search-results/*"
-                            element={<SearchResult posts={posts} />}
+                            element={
+                                <SearchResult
+                                    posts={posts}
+                                    comments={comments}
+                                />
+                            }
                         />
                         <Route
                             path="/new-post"

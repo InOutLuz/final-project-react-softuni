@@ -1,16 +1,17 @@
-import { useState } from "react";
-import Banner from "./Banner";
-import Preloader from "./Preloader";
-import OwlCarousel from "react-owl-carousel";
 import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
 
-import DownloadBanner from "./DownloadBanner";
-import BlogPostsAll from "./BlogPostsAll";
-import useLatestPosts from "../components/hooks/useLatestPosts";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
+import OwlCarousel from "react-owl-carousel";
 
-export default function BlogPosts({ posts }) {
+import Banner from "../banner/Banner";
+import Preloader from "../preloader/Preloader";
+import DownloadBanner from "../downloadBanner/DownloadBanner";
+import BlogPostsList from "../blogPostsList/BlogPostsList";
+
+import useLatestPosts from "../../hooks/useLatestPosts";
+
+export default function BlogPostsHome({ posts, comments }) {
     const [dataLoaded, setDataLoaded] = useState(false);
     const { latest3Posts, latest6Posts } = useLatestPosts(posts);
 
@@ -39,15 +40,16 @@ export default function BlogPosts({ posts }) {
                         dots="false"
                     >
                         {latest6Posts.map((lp) => (
-                            <Banner key={lp.id} {...lp} />
+                            <Banner key={lp.id} {...lp} comments={comments} />
                         ))}
                     </OwlCarousel>
 
                     <DownloadBanner />
 
-                    <BlogPostsAll
+                    <BlogPostsList
                         posts={latest3Posts}
                         latest3Posts={latest3Posts}
+                        comments={comments}
                     />
                 </>
             )}

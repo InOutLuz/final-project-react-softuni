@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom";
-
 import { useContext } from "react";
-import { UserContext } from "./contexts/userContext";
-import { signOutUser } from "../utils/Firebase.utils";
+
+import { UserContext } from "../../contexts/userContext";
+
+import { signOutUser } from "../../utils/Firebase.utils";
 
 export default function Header({ handlePopupOpen }) {
-    const { currentUser, setCurrentUser, userDisplayName, setUserDisplayName } =
+    const { currentUser, setCurrentUser, setUserDisplayName } =
         useContext(UserContext);
     const signOutHandler = async () => {
         await signOutUser();

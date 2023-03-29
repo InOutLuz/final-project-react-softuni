@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
+
 import formatDate from "../../utils/FormatDate";
+
 export default function RecentPosts({ id, title, createdAt }) {
     return (
         <div className="content">

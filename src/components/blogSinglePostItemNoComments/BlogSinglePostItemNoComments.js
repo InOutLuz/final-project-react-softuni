@@ -1,7 +1,10 @@
-import formatDate from "../utils/FormatDate";
 import { Link } from "react-router-dom";
 
-export default function SinglePost({
+import formatDate from "../../utils/FormatDate";
+
+import usePostComments from "../../hooks/usePostComments";
+
+export default function BlogSinglePostItemNoComments({
     author,
     title,
     imgUrl,
@@ -10,8 +13,10 @@ export default function SinglePost({
     createdAt,
     tags,
     id,
+    comments,
 }) {
     const excerpt = content.slice(0, 250) + "...";
+    const postComments = usePostComments(comments, id);
 
     return (
         <section className="blog-posts grid-system">
@@ -46,7 +51,9 @@ export default function SinglePost({
                                         </Link>
                                     </li>
                                     <li>
-                                        <a href="#">10 Comments</a>
+                                        <Link to={`/blog/${id}`}>
+                                            {postComments.length} Comments
+                                        </Link>
                                     </li>
                                 </ul>
                                 <p>{excerpt}</p>

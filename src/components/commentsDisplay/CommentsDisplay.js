@@ -1,4 +1,4 @@
-import formatDate from "../utils/FormatDate";
+import formatDate from "../../utils/FormatDate";
 
 export default function CommentsDisplay({ postComments }) {
     return (
@@ -26,7 +26,6 @@ export default function CommentsDisplay({ postComments }) {
                                             {comment.ownerDisplayName}
                                             <span>
                                                 {formatDate(comment.createdAt)}
-                                                {console.log(comment.createdAt)}
                                             </span>
                                         </h4>
                                         <p>{comment.content}</p>

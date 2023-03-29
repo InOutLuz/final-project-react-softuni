@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
-import BlogSinglePost from "./BlogSinglePost";
 import { useLocation } from "react-router-dom";
-import BlogDetailsBanner from "./BlogDetailsBanner";
-import DownloadBanner from "./DownloadBanner";
-import BlogPostsAll from "./BlogPostsAll";
-import useLatestPosts from "./hooks/useLatestPosts";
 
-function SearchResult({ posts }) {
+import InnerPageInformationBanner from "../innerPagesInformationBanner/InnerPageInformationBanner";
+import DownloadBanner from "../downloadBanner/DownloadBanner";
+import BlogPostsList from "../blogPostsList/BlogPostsList";
+
+import useLatestPosts from "../../hooks/useLatestPosts";
+
+export default function SearchResult({ posts, comments }) {
     const [searchResults, setSearchResults] = useState([]);
     const { latest3Posts } = useLatestPosts(posts);
 
@@ -21,11 +22,11 @@ function SearchResult({ posts }) {
             post.title.toLowerCase().includes(searchQuery.toLowerCase())
         );
         setSearchResults(results);
-    }, [location.search, posts]);
+    }, [location.search, posts, searchQuery]);
 
     return (
         <>
-            <BlogDetailsBanner
+            <InnerPageInformationBanner
                 blogName={searchQuery}
                 subtitle={"Search Results For:"}
             />
@@ -33,13 +34,12 @@ function SearchResult({ posts }) {
             <DownloadBanner />
 
             <div className="search-result">
-                <BlogPostsAll
+                <BlogPostsList
                     posts={searchResults}
                     latest3Posts={latest3Posts}
+                    comments={comments}
                 />
             </div>
         </>
     );
 }
-
-export default SearchResult;

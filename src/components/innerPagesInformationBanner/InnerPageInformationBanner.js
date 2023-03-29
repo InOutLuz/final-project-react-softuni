@@ -1,4 +1,4 @@
-export default function BlogDetailsBanner({ blogName, subtitle }) {
+export default function InnerPageInformationBanner({ blogName, subtitle }) {
     return (
         <div className="heading-page header-text">
             <section className="page-heading">

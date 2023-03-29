@@ -1,10 +1,11 @@
+import "./LoginRegisterPopup.css";
+
 import { useState, useRef, useEffect } from "react";
-import CreateBlogForm from "../blogCreateForm/BlogCreateForm";
+
 import SignInForm from "../signInForm/SignInForm";
 import SignUpForm from "../signUpForm/SignUpForm";
-import "./popup.css";
 
-export default function Popup({ handlePopupClose }) {
+export default function LoginRegisterPopup({ handlePopupClose }) {
     const [isSignInForm, setIsSignInForm] = useState(true);
     const popupRef = useRef(null);
 

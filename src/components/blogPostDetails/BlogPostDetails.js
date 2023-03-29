@@ -1,31 +1,29 @@
-import formatDate from "../utils/FormatDate";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { db } from "../utils/Firebase.utils";
+import { db } from "../../utils/Firebase.utils";
 import { doc, getDoc } from "firebase/firestore";
-import Preloader from "./Preloader";
 
-import BlogDetailsBanner from "./BlogDetailsBanner";
-import CommentsDisplay from "./CommentsDisplay";
-import CommentAdd from "./commentAdd/CommentAdd";
-import DownloadBanner from "./DownloadBanner";
-import BlogSidebar from "./BlogSidebar";
+import Preloader from "../preloader/Preloader";
+import InnerPageInformationBanner from "../innerPagesInformationBanner/InnerPageInformationBanner";
+import CommentsDisplay from "../commentsDisplay/CommentsDisplay";
+import CommentAdd from "../commentAdd/CommentAdd";
+import DownloadBanner from "../downloadBanner/DownloadBanner";
+import BlogSidebar from "../blogSidebar/BlogSidebar";
 
-const BlogDetails = ({ posts, comments, handlePopupOpen, OnAddComment }) => {
+import usePostComments from "../../hooks/usePostComments";
+
+import formatDate from "../../utils/FormatDate";
+
+export default function BlogPostDetails({
+    posts,
+    comments,
+    handlePopupOpen,
+    OnAddComment,
+}) {
     const { postId } = useParams();
-    const [postComments, setPostComments] = useState([]);
+    const postComments = usePostComments(comments, postId);
     const [post, setPost] = useState(null);
     const [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-        const filteredComments = comments.filter(
-            (comment) => comment.postId === postId
-        );
-        const sortedComments = filteredComments.sort(
-            (a, b) => b.createdAt.toDate() - a.createdAt.toDate()
-        );
-        setPostComments(sortedComments);
-    }, [comments, postId]);
 
     useEffect(() => {
         const getPost = async () => {
@@ -47,7 +45,7 @@ const BlogDetails = ({ posts, comments, handlePopupOpen, OnAddComment }) => {
 
     return (
         <>
-            <BlogDetailsBanner
+            <InnerPageInformationBanner
                 blogName={post.title}
                 subtitle={"Post details"}
             />
@@ -191,6 +189,4 @@ const BlogDetails = ({ posts, comments, handlePopupOpen, OnAddComment }) => {
             </section>
         </>
     );
-};
-
-export default BlogDetails;
+}

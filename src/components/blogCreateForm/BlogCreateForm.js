@@ -1,10 +1,14 @@
-import { useState, useContext } from "react";
-import BlogCreate from "../../utils/BlogCreate";
-import { UserContext } from "../contexts/userContext";
 import styles from "./BlogCreateForm.module.css";
+
+import { useState, useContext } from "react";
+
 import FormInput from "../formInput/FormInput";
-import BlogDetailsBanner from "../BlogDetailsBanner";
+import InnerPageInformationBanner from "../innerPagesInformationBanner/InnerPageInformationBanner";
 import Button, { BUTTON_TYPE_CLASSES } from "../button/Button";
+
+import BlogCreate from "../../utils/BlogCreate";
+
+import { UserContext } from "../../contexts/userContext";
 
 const CreateBlogForm = ({ user, OnAddPost }) => {
     const [formData, setFormData] = useState({
@@ -71,13 +75,13 @@ const CreateBlogForm = ({ user, OnAddPost }) => {
                 imgUrl: "",
             });
         } catch (error) {
-            console.error(error); // handle any errors that occurred while creating the post
+            console.error(error);
         }
     };
 
     return (
         <>
-            <BlogDetailsBanner
+            <InnerPageInformationBanner
                 blogName="New post"
                 subtitle="Create a new blog post"
             />
