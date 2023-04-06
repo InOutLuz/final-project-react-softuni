@@ -90,10 +90,21 @@ export default function BlogSinglePostItemNoComments({
                                                     <i className="fa fa-share-alt"></i>
                                                 </li>
                                                 <li>
-                                                    <a href="#">Facebook</a>,
+                                                    <a
+                                                        href="https://www.facebook.com/sharer/sharer.php?u=example.org"
+                                                        target="_blank"
+                                                    >
+                                                        Facebook
+                                                    </a>
+                                                    ,
                                                 </li>
                                                 <li>
-                                                    <a href="#"> Twitter</a>
+                                                    <a
+                                                        href="https://twitter.com/intent/tweet"
+                                                        target="_blank"
+                                                    >
+                                                        Twitter
+                                                    </a>
                                                 </li>
                                             </ul>
                                         </div>

@@ -1,5 +1,6 @@
 import BlogSinglePostItemNoComments from "../blogSinglePostItemNoComments/BlogSinglePostItemNoComments";
 import BlogSidebar from "../blogSidebar/BlogSidebar";
+import { Link } from "react-router-dom";
 
 export default function BlogPostsList({ posts, latest3Posts, comments }) {
     return (
@@ -31,15 +32,15 @@ export default function BlogPostsList({ posts, latest3Posts, comments }) {
 
                                     <div className="col-lg-12">
                                         <div className="main-button">
-                                            <a href="blog.html">
+                                            <Link to={"/all-posts"}>
                                                 View All Posts
-                                            </a>
+                                            </Link>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <BlogSidebar posts={latest3Posts} />
+                        <BlogSidebar latest3Posts={latest3Posts} />
                     </div>
                 </div>
             </section>

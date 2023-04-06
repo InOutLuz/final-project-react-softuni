@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../utils/Firebase.utils";
+import { deleteComment } from "../utils/Firebase.utils";
 
 export default function useComments() {
     const [comments, setComments] = useState([]);
@@ -25,6 +26,12 @@ export default function useComments() {
         ]);
     };
 
+    const OnDeleteComment = async (commentId, currentUser) => {
+        const updatedComments = comments.filter((c) => c.id !== commentId);
+
+        setComments(updatedComments);
+    };
+
     useEffect(() => {
         const sortedComments = comments.sort(
             (a, b) => b.createdAt - a.createdAt
@@ -35,5 +42,6 @@ export default function useComments() {
     return {
         comments,
         OnAddComment,
+        OnDeleteComment,
     };
 }

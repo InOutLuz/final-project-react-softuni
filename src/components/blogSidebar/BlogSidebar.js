@@ -5,7 +5,7 @@ import RecentPosts from "../blogSidebarComponents/RecentPosts";
 
 import useLatestPosts from "../../hooks/useLatestPosts";
 
-export default function BlogSidebar({ posts }) {
+export default function BlogSidebar({ posts, comments }) {
     const { latest3Posts } = useLatestPosts(posts);
     const [searchQuery, setSearchQuery] = useState("");
     const navigate = useNavigate();
@@ -45,7 +45,11 @@ export default function BlogSidebar({ posts }) {
                             <div className="sidebar-heading">
                                 <h2>Recent Posts</h2>
                                 {latest3Posts.map((p) => (
-                                    <RecentPosts key={p.id} {...p} />
+                                    <RecentPosts
+                                        key={p.id}
+                                        {...p}
+                                        comments={comments}
+                                    />
                                 ))}
                             </div>
                         </div>

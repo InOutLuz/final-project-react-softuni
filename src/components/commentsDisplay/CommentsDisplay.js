@@ -1,6 +1,39 @@
 import formatDate from "../../utils/FormatDate";
 
-export default function CommentsDisplay({ postComments }) {
+import { deleteComment } from "../../utils/Firebase.utils";
+
+import { UserContext } from "../../contexts/userContext";
+import { useContext } from "react";
+
+import "./commentsDisplay.css";
+
+export default function CommentsDisplay({ postComments, OnDeleteComment }) {
+    const { currentUser } = useContext(UserContext);
+
+    const handleDeleteComment = (comment) => {
+        try {
+            if (!currentUser || !currentUser.uid) {
+                console.log("No user is currently logged in");
+                return;
+            }
+
+            if (comment.owner !== currentUser.uid) {
+                console.log("You are not the owner of this comment");
+                return;
+            }
+            const confirmDelete = window.confirm(
+                "Are you sure you want to delete this comment?"
+            );
+            if (confirmDelete) {
+                deleteComment(comment.id, currentUser);
+                OnDeleteComment(comment.id, currentUser);
+            }
+        } catch (e) {
+            console.error("Error deleting comment: ", e);
+            throw e;
+        }
+    };
+
     return (
         <div className="col-lg-12">
             <div className="sidebar-item comments">
@@ -27,6 +60,20 @@ export default function CommentsDisplay({ postComments }) {
                                             <span>
                                                 {formatDate(comment.createdAt)}
                                             </span>
+                                            {currentUser &&
+                                                comment.owner ===
+                                                    currentUser.uid && (
+                                                    <button
+                                                        id="deleteComment"
+                                                        onClick={() =>
+                                                            handleDeleteComment(
+                                                                comment
+                                                            )
+                                                        }
+                                                    >
+                                                        x
+                                                    </button>
+                                                )}
                                         </h4>
                                         <p>{comment.content}</p>
                                     </div>

@@ -17,11 +17,12 @@ export default function SearchResult({ posts, comments }) {
     );
 
     useEffect(() => {
-        // extract only the part after ?q=
-        const results = posts.filter((post) =>
-            post.title.toLowerCase().includes(searchQuery.toLowerCase())
-        );
-        setSearchResults(results);
+        if (searchQuery) {
+            const results = posts.filter((post) =>
+                post.title.toLowerCase().includes(searchQuery.toLowerCase())
+            );
+            setSearchResults(results);
+        }
     }, [location.search, posts, searchQuery]);
 
     return (

@@ -15,7 +15,6 @@ export default function BlogPostsHome({ posts, comments }) {
     const [dataLoaded, setDataLoaded] = useState(false);
     const { latest3Posts, latest6Posts } = useLatestPosts(posts);
 
-    // Check if all data has been loaded
     useEffect(() => {
         if (latest3Posts.length > 0) {
             setDataLoaded(true);
@@ -29,21 +28,25 @@ export default function BlogPostsHome({ posts, comments }) {
             {dataLoaded && (
                 <>
                     <div className="main-banner header-text">
-                        <div className="container-fluid"></div>
+                        <div className="container-fluid">
+                            <OwlCarousel
+                                className="owl-theme"
+                                margin={10}
+                                rewind
+                                autoplay
+                                nav
+                                dots="false"
+                            >
+                                {latest6Posts.map((lp) => (
+                                    <Banner
+                                        key={lp.id}
+                                        {...lp}
+                                        comments={comments}
+                                    />
+                                ))}
+                            </OwlCarousel>
+                        </div>
                     </div>
-                    <OwlCarousel
-                        className="owl-theme"
-                        loop
-                        margin={10}
-                        autoplay
-                        nav
-                        dots="false"
-                    >
-                        {latest6Posts.map((lp) => (
-                            <Banner key={lp.id} {...lp} comments={comments} />
-                        ))}
-                    </OwlCarousel>
-
                     <DownloadBanner />
 
                     <BlogPostsList

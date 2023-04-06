@@ -19,6 +19,7 @@ export default function BlogPostDetails({
     comments,
     handlePopupOpen,
     OnAddComment,
+    OnDeleteComment,
 }) {
     const { postId } = useParams();
     const postComments = usePostComments(comments, postId);
@@ -173,6 +174,7 @@ export default function BlogPostDetails({
 
                                     <CommentsDisplay
                                         postComments={postComments}
+                                        OnDeleteComment={OnDeleteComment}
                                     />
 
                                     <CommentAdd

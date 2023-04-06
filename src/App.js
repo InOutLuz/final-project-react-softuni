@@ -18,6 +18,7 @@ import { UserContext } from "./contexts/userContext";
 
 import useLatestPosts from "./hooks/useLatestPosts";
 import useComments from "./hooks/useComments";
+import BlogGrid from "./blogGrid/BlogGrid";
 
 function App() {
     const { userDisplayName } = useContext(UserContext);
@@ -25,7 +26,7 @@ function App() {
     const [loginPopupOpen, setLoginPopupOpen] = useState(false);
 
     const { posts, loading, OnAddPost } = useLatestPosts();
-    const { comments, OnAddComment } = useComments();
+    const { comments, OnAddComment, OnDeleteComment } = useComments();
 
     const handlePopupClose = () => {
         setLoginPopupOpen(false);
@@ -66,6 +67,7 @@ function App() {
                                     comments={comments}
                                     handlePopupOpen={handlePopupOpen}
                                     OnAddComment={OnAddComment}
+                                    OnDeleteComment={OnDeleteComment}
                                 />
                             }
                         />
@@ -79,6 +81,13 @@ function App() {
                                 />
                             }
                         />
+                        <Route
+                            path="/all-posts"
+                            element={
+                                <BlogGrid posts={posts} comments={comments} />
+                            }
+                        />
+
                         <Route
                             path="/search-results/*"
                             element={

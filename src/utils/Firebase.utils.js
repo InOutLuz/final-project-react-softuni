@@ -16,6 +16,7 @@ import {
     setDoc,
     addDoc,
     collection,
+    deleteDoc,
 } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -117,4 +118,22 @@ export const addComment = async (postId, ownerDisplayName, content, owner) => {
         console.error("Error adding comment: ", e);
         throw e;
     }
+};
+
+export const deleteComment = async (commentId, currentUser) => {
+    const docRef = doc(db, "comments", commentId);
+    const docSnap = await getDoc(docRef);
+
+    if (!docSnap.exists()) {
+        console.log("Comment not found");
+        return;
+    }
+
+    const comment = docSnap.data();
+
+    await deleteDoc(docRef);
+
+    console.log("Comment deleted successfully");
+
+    return comment;
 };

@@ -1,0 +1,13 @@
+#deleteComment {
+    background: none;
+    border: none;
+    color: red;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    float: right;
+}
+
+#deleteComment:hover {
+    color: darkred;
+}
