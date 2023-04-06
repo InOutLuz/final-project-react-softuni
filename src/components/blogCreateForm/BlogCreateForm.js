@@ -1,6 +1,7 @@
 import styles from "./BlogCreateForm.module.css";
 
 import { useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 
 import FormInput from "../formInput/FormInput";
 import InnerPageInformationBanner from "../innerPagesInformationBanner/InnerPageInformationBanner";
@@ -21,6 +22,7 @@ const CreateBlogForm = ({ user, OnAddPost }) => {
         imgUrl: "",
     });
 
+    const navigate = useNavigate();
     const { currentUser } = useContext(UserContext);
 
     function validateForm(formData) {
@@ -74,6 +76,8 @@ const CreateBlogForm = ({ user, OnAddPost }) => {
                 tags: "",
                 imgUrl: "",
             });
+            alert("Your new post has been created successfully!");
+            navigate("/");
         } catch (error) {
             console.error(error);
         }

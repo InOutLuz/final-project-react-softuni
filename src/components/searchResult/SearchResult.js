@@ -18,12 +18,23 @@ export default function SearchResult({ posts, comments }) {
 
     useEffect(() => {
         if (searchQuery) {
-            const results = posts.filter((post) =>
-                post.title.toLowerCase().includes(searchQuery.toLowerCase())
-            );
+            const results = posts.filter((post) => {
+                const titleMatch = post.title
+                    .toLowerCase()
+                    .includes(searchQuery.toLowerCase());
+                const categoryMatch = Object.keys(post.category).some(
+                    (key) =>
+                        post.category[key] &&
+                        key.toLowerCase().includes(searchQuery.toLowerCase())
+                );
+                return titleMatch || categoryMatch;
+            });
             setSearchResults(results);
+            console.log("results:", results);
         }
     }, [location.search, posts, searchQuery]);
+
+    console.log("searchQuery:", searchQuery);
 
     return (
         <>

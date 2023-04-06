@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { db } from "../../utils/Firebase.utils";
 import { doc, getDoc } from "firebase/firestore";
@@ -91,11 +91,15 @@ export default function BlogPostDetails({
                                                         </a>
                                                     </li>
                                                     <li>
-                                                        <a href="#">
+                                                        <Link
+                                                            to={`../posts/${formatDate(
+                                                                post.createdAt
+                                                            )}`}
+                                                        >
                                                             {formatDate(
                                                                 post.createdAt
                                                             )}
-                                                        </a>
+                                                        </Link>
                                                     </li>
                                                     <li>
                                                         <a href="#">

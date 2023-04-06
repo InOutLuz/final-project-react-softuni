@@ -52,14 +52,7 @@ export default function Header({ handlePopupOpen }) {
                             <Link className="nav-link" to="/all-posts">
                                 Blog Entries
                             </Link>
-                            <li className="nav-item">
-                                <Link
-                                    className="nav-link"
-                                    to="/search-results/"
-                                >
-                                    Search
-                                </Link>
-                            </li>
+
                             <li className="nav-item">
                                 <a className="nav-link" href="contact.html">
                                     Contact Us

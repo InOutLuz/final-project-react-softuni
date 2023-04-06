@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 import RecentPosts from "../blogSidebarComponents/RecentPosts";
 
@@ -63,22 +63,21 @@ export default function BlogSidebar({ posts, comments }) {
                             <div className="content">
                                 <ul>
                                     <li>
-                                        <a href="#">- Nature Lifestyle</a>
+                                        <Link
+                                            to={"/search-results/?q=business"}
+                                        >
+                                            - Business
+                                        </Link>
                                     </li>
                                     <li>
-                                        <a href="#">- Awesome Layouts</a>
+                                        <Link to={"/search-results/?q=news"}>
+                                            - News
+                                        </Link>
                                     </li>
                                     <li>
-                                        <a href="#">- Creative Ideas</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">- Responsive Templates</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">- HTML5 / CSS3 Templates</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">- Creative &amp; Unique</a>
+                                        <Link to={"/search-results/?q=it"}>
+                                            - IT
+                                        </Link>
                                     </li>
                                 </ul>
                             </div>

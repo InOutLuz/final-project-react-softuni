@@ -25,7 +25,7 @@ export default function BlogSinglePostItemNoComments({
                     <div className="col-lg-12">
                         <div className="blog-post">
                             <div className="blog-thumb">
-                                <img src={`${imgUrl}`} alt="" />
+                                <img src={imgUrl} alt={title} />
                             </div>
                             <div className="down-content">
                                 <span>
@@ -93,6 +93,7 @@ export default function BlogSinglePostItemNoComments({
                                                     <a
                                                         href="https://www.facebook.com/sharer/sharer.php?u=example.org"
                                                         target="_blank"
+                                                        rel="noreferrer"
                                                     >
                                                         Facebook
                                                     </a>
@@ -102,6 +103,7 @@ export default function BlogSinglePostItemNoComments({
                                                     <a
                                                         href="https://twitter.com/intent/tweet"
                                                         target="_blank"
+                                                        rel="noreferrer"
                                                     >
                                                         Twitter
                                                     </a>
@@ -113,11 +115,7 @@ export default function BlogSinglePostItemNoComments({
                             </div>
                         </div>
                     </div>
-                    {/*  <CommentsDisplay />
-                                <CommentsSubmit /> */}
                 </div>
-
-                {/*  <BlogSidebar posts={latest3Posts} /> */}
             </div>
         </section>
     );
