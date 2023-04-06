@@ -158,13 +158,21 @@ export default function BlogPostDetails({
                                                                     <i className="fa fa-share-alt"></i>
                                                                 </li>
                                                                 <li>
-                                                                    <a href="#">
+                                                                    <a
+                                                                        href={`https://www.facebook.com/sharer.php?u=http://localhost:3000/blog/${post.id}`}
+                                                                        target="_blank"
+                                                                        rel="noreferrer"
+                                                                    >
                                                                         Facebook
                                                                     </a>
                                                                     ,
                                                                 </li>
                                                                 <li>
-                                                                    <a href="#">
+                                                                    <a
+                                                                        href={`https://twitter.com/share?url=http://localhost:3000/blog/${post.id}`}
+                                                                        target="_blank"
+                                                                        rel="noreferrer"
+                                                                    >
                                                                         Twitter
                                                                     </a>
                                                                 </li>

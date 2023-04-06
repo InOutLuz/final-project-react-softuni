@@ -91,7 +91,7 @@ export default function BlogSinglePostItemNoComments({
                                                 </li>
                                                 <li>
                                                     <a
-                                                        href="https://www.facebook.com/sharer/sharer.php?u=example.org"
+                                                        href={`https://www.facebook.com/sharer.php?u=http://localhost:3000/blog/${id}`}
                                                         target="_blank"
                                                         rel="noreferrer"
                                                     >
@@ -101,7 +101,7 @@ export default function BlogSinglePostItemNoComments({
                                                 </li>
                                                 <li>
                                                     <a
-                                                        href="https://twitter.com/intent/tweet"
+                                                        href={`https://twitter.com/share?url=http://localhost:3000/blog/${id}`}
                                                         target="_blank"
                                                         rel="noreferrer"
                                                     >
